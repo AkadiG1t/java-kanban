@@ -41,16 +41,16 @@ public class Task {
         this.id = id;
     }
 
+    public Task(String name, String description, String status) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+    }
+
     public Task(String name, String description, String status, int id) {
         this.name = name;
         this.description = description;
         this.status = status;
-        this.id = id;
-    }
-
-    public Task(String name, String description, int id) {
-        this.name = name;
-        this.description = description;
         this.id = id;
     }
 
@@ -64,10 +64,6 @@ public class Task {
                 '}';
     }
 
-    public Task(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 
     @Override
     public boolean equals(Object o) {
