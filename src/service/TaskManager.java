@@ -119,7 +119,9 @@ public class TaskManager {
         subTasks.clear();
         for(Epic epic : epics.values()) {
             epic.getSubtasks().clear();
+            checkEpicStatus(epic);
         }
+
     }
     public void removeSubTask(int id) {
         SubTask removeSub = subTasks.get(id);
@@ -129,6 +131,7 @@ public class TaskManager {
                 epic.getSubtasks().remove(removeSub);
             }
         }
+        checkEpicStatus(removeSub.getEpic());
     }
 
     public SubTask getSubtask(int id) {
@@ -144,9 +147,12 @@ public class TaskManager {
         return subTask;
     }
 
+
+
     public SubTask updateSubTasks(SubTask subTask) {
         subTasks.put(subTask.getId(), subTask);
         subTask.getEpic().addSubTask(subTask);
+        checkEpicStatus(subTask.getEpic());
         return subTask;
     }
 }
