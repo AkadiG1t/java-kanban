@@ -144,6 +144,7 @@ public class TaskManager {
         subTasks.put(subTask.getId(), subTask);
         subTask.setEpic(epic);
         epic.addSubTask(subTask);
+        checkEpicStatus(epic);
         return subTask;
     }
 
