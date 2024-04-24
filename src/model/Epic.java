@@ -1,18 +1,19 @@
 package model;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
 
 public class Epic extends Task {
-    private Set<SubTask> subtasks = new LinkedHashSet<>();
+    private ArrayList<SubTask> subtasks = new ArrayList<>();
 
     public Epic(String name, String description) {
         super(name, description, null);
     }
 
 
-    public Set<SubTask> getSubtasks() {
-        return (LinkedHashSet<SubTask>) subtasks;
+    public ArrayList<SubTask> getSubtasks() {
+        return subtasks;
     }
 
     public void addSubTask(SubTask subTask) {
@@ -31,5 +32,19 @@ public class Epic extends Task {
                 ", status='" + getStatus() + '\'' +
                 ", id=" + getId() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Epic epic = (Epic) o;
+        return Objects.equals(subtasks, epic.subtasks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), subtasks);
     }
 }

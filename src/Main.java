@@ -4,7 +4,6 @@ import model.SubTask;
 import model.Task;
 import service.TaskManager;
 
-import java.util.HashMap;
 
 public class Main {
 
@@ -22,10 +21,10 @@ public class Main {
         System.out.println("Create SubTask: " + subTask);
         SubTask subTask1 = taskManager.createSubTask(new SubTask("newSubtask2", "task2",
                 String.valueOf(Status.NEW)), epic);
-        System.out.println("CreateSubTask2: " + subTask1);
+        System.out.println("Create SubTask2: " + subTask1);
         System.out.println(epic.getSubtasks());
 
-        taskManager.removeEpics(epic.getId());
+        taskManager.deleteEpic(epic.getId());
         System.out.println(taskManager.getEpics());
         System.out.println(taskManager.getAllSubTasks());
         System.out.println(epic.getSubtasks());

@@ -1,11 +1,9 @@
 
-m	java:S106"+Replace this use of System.out by a logger.(¤Ç½8ê¼šÎì1J$d983cb8f-4f01-4e8b-b7ab-635eaa6ce039
-m	java:S106"+Replace this use of System.out by a logger.(È˜ûŒ8ë¼šÎì1J$24fd949a-0879-40c8-92f3-73999d085a4d
-r	java:S106"+Replace this use of System.out by a logger.(Ç’Ôïşÿÿÿÿ8ì¼šÎì1J$8b2fed6d-7e18-4191-8e7c-dcd6968e1d60
-r	java:S106"+Replace this use of System.out by a logger.(ÈÔÕ©üÿÿÿÿ8í¼šÎì1J$0c3b0a7a-b35a-4e44-ac43-f1fa259f79f6
-r	java:S106"+Replace this use of System.out by a logger.(èŸåùÿÿÿÿ8í¼šÎì1J$51d2b534-c01b-4009-8fa9-be7441f81be6
-r	java:S106"+Replace this use of System.out by a logger.(Ëğ©Ùùÿÿÿÿ8Ìâ›Îì1J$d8521c8b-6e9e-4e1c-af71-27069484ad7d
-m	java:S106"+Replace this use of System.out by a logger.(Ö—É¢8÷ùœÎì1J$6e9ef8bd-b1b3-4138-9358-bb4deaf1e5dd
-r	java:S106"+Replace this use of System.out by a logger.(èŸåùÿÿÿÿ8¸ÚÎì1J$3e5616d4-f15f-439b-b927-cee8e79439e0
-v
-java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8¤¯°Îì1J$5110d620-db7f-4e65-8ea2-d1a15381aa78
+m	java:S106"+Replace this use of System.out by a logger.(¤Ç½8ê¼šÎì1J$d8c74e6c-a44d-4b47-9817-1b1f2138357c
+m	java:S106"+Replace this use of System.out by a logger.(È˜ûŒ8ë¼šÎì1J$faaac13a-1779-4075-9eb7-174ff16a2d33
+r	java:S106"+Replace this use of System.out by a logger.(Ç’Ôïşÿÿÿÿ8ì¼šÎì1J$68cdffdd-6f7c-4f1f-9453-841dcf17c53e
+r	java:S106"+Replace this use of System.out by a logger.(ÈÔÕ©üÿÿÿÿ8í¼šÎì1J$4076a82e-a423-43b7-87c2-46bf0092647e
+r	java:S106"+Replace this use of System.out by a logger.(èŸåùÿÿÿÿ8í¼šÎì1J$04bc0ed9-962e-4bf5-93a5-268095bb0c32
+r	java:S106"+Replace this use of System.out by a logger.(Ëğ©Ùùÿÿÿÿ8Ìâ›Îì1J$828a4d58-6cc5-4f7b-a6b2-7c48e097b230
+m	java:S106"+Replace this use of System.out by a logger.(Ö—É¢8÷ùœÎì1J$c99f5898-690b-4016-876f-202b6b0ddb17
+r	java:S106"+Replace this use of System.out by a logger.(èŸåùÿÿÿÿ8¸ÚÎì1J$00a4ef96-12c9-4a66-8e19-4a88b4e27cb1
