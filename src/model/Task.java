@@ -8,6 +8,18 @@ public class Task {
     private String status;
     private int id;
 
+    public Task(String name, String description, String status) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+    }
+    public Task(String name, String description, String status, int id) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.id = id;
+    }
+
 
     public String getName() {
         return name;
@@ -41,18 +53,6 @@ public class Task {
         this.id = id;
     }
 
-    public Task(String name, String description, String status) {
-        this.name = name;
-        this.description = description;
-        this.status = status;
-    }
-
-    public Task(String name, String description, String status, int id) {
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.id = id;
-    }
 
     @Override
     public String toString() {
@@ -63,7 +63,6 @@ public class Task {
                 ", id=" + id +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
