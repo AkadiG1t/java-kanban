@@ -3,19 +3,20 @@ import model.Epic;
 import model.Status;
 import model.SubTask;
 import model.Task;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+
+import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
 
-    private HashMap<Integer, Task> tasks = new HashMap<>();
-    private HashMap<Integer, Epic> epics = new HashMap<>();
-    private HashMap<Integer, SubTask> subTasks = new HashMap<>();
-    private  List<? extends Task> history = new LinkedList<>();
+    private Map<Integer, Task> tasks = new HashMap<>();
+    private Map<Integer, Epic> epics = new HashMap<>();
+    private Map<Integer, SubTask> subTasks = new HashMap<>();
+    private HistoryManager historyManager;
 
-    HistoryManager historyManager = Managers.getDefaultHistory();
+    public InMemoryTaskManager(HistoryManager historyManager) {
+        this.historyManager = historyManager;
+    }
+
     private int id = 0;
 
     private int generateID() {

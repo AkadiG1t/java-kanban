@@ -1,8 +1,12 @@
 
-—
-java:S1192"ODefine a constant instead of duplicating this literal "newDescription" 5 times.( äˆÎûÿÿÿÿ8ô¢“úô1J$1929bd97-3a67-4e78-87ff-96fd83d83d44
 
-java:S1192"HDefine a constant instead of duplicating this literal "newEpic" 3 times.( äˆÎûÿÿÿÿ8ô¢“úô1J$03e18000-41b6-4001-bf01-9896724b85e4
-¡	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Šİò¼ûÿÿÿÿ8¨…’úô1J$103fba3a-47a0-4316-bc1b-353e1c6c3f55
+java:S1192"HDefine a constant instead of duplicating this literal "newEpic" 3 times.( äˆÎûÿÿÿÿ8×ä…Ëõ1J$201070c0-9395-48fd-b4ba-8c8221a60143
+—
+java:S1192"ODefine a constant instead of duplicating this literal "newDescription" 5 times.( äˆÎûÿÿÿÿ8×ä…Ëõ1J$1effcfa6-71ab-4bec-9be1-4c85b8817c68
+¡	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Šİò¼ûÿÿÿÿ8Úä…Ëõ1J$4fc7e53e-e9e7-4db3-b759-a014405fe23b
+K
+java:S1128")Remove this unused import 'model.Status'.(õ™Ğ·ùÿÿÿÿ8ê”½Ëõ1
+X
+java:S1128	";Remove this unused import 'service.InMemoryHistoryManager'.(–‡¢8ê”½Ëõ1
 s
-java:S5960"+Remove this assertion from production code.(™ÓŸğÿÿÿÿÿ8ö™Çøô1J$92f9ff54-92c1-46e8-bdb9-c4e01d73f0f4
+java:S5960"+Remove this assertion from production code.(™ÓŸğÿÿÿÿÿ8ñä…Ëõ1J$e9c8061f-bdc5-4f38-837b-f7ef4cc4933c

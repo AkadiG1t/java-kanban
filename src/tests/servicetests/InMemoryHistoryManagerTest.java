@@ -1,6 +1,5 @@
-package Tests;
+package tests.servicetests;
 
-import model.Status;
 import model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
     InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
-    Task task = new Task("newTask", "newDecription", String.valueOf(Status.NEW));
+    Task task = new Task("newTask", "newDecription");
 
 
     @Test

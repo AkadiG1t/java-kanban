@@ -1,12 +1,12 @@
-package Tests;
+package tests.modeltests;
 
 import model.Epic;
-import model.Status;
 import model.SubTask;
 import model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import service.InMemoryTaskManager;
+import service.Managers;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -23,12 +23,11 @@ class EpicTestId {
 
     static class InMemoryTaskManagerTest {
     
-        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
-        Task task = inMemoryTaskManager.createTask(new Task("newTask", "newDescription", String.valueOf(Status.NEW)
-            ));
+        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(Managers.getDefaultHistory());
+        Task task = inMemoryTaskManager.createTask(new Task("newTask", "newDescription"));
         Epic epic = inMemoryTaskManager.createEpic(new Epic("newEpic", "newDescription"));
-        Task subTask = inMemoryTaskManager.createSubTask(new SubTask("newSubTask", "newDescription",
-                    String.valueOf(Status.NEW)), epic);
+        Task subTask = inMemoryTaskManager.createSubTask(new SubTask("newSubTask", "newDescription"),
+                epic);
     
         @Test
         void createTask() {

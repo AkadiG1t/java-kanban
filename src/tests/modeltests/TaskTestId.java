@@ -1,17 +1,19 @@
-package Tests;
+package tests.modeltests;
 
-import model.Status;
 import model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class TaskTestId {
-    Task task = new Task("newTask", "newDescription", String.valueOf(Status.NEW), 1);
-    Task task2 = new Task("newTask", "newDescription", String.valueOf(Status.NEW), 1);
+    Task task = new Task("newTask", "newDescription");
+
+    Task task2 = new Task("newTask", "newDescription");
 
 
     @Test
     public void taskEquals() {
+        task.setId(1);
+        task2.setId(1);
         Assertions.assertEquals(task, task2);
     }
 }

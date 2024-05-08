@@ -14,19 +14,16 @@ public class Main {
         TaskManager taskManager = Managers.getDefault();
 
 
-        Task task = taskManager.createTask(new Task("Новая задача", "Описание",
-                String.valueOf(Status.NEW)));
+        Task task = taskManager.createTask(new Task("newTask", "newDescription"));
 
         out.println("Create task " + task);
 
         Epic epic = taskManager.createEpic(new Epic("Новый Эпик", "Описание эпика"));
         out.println("Create epic: " + epic);
 
-        Task subTask = taskManager.createSubTask(new SubTask("new subTask1", "task",
-                String.valueOf(Status.NEW)), epic);
+        Task subTask = taskManager.createSubTask(new SubTask("new subTask1", "task"), epic);
         out.println("Create SubTask: " + subTask);
-        SubTask subTask1 = taskManager.createSubTask(new SubTask("newSubtask2", "task2",
-                String.valueOf(Status.NEW)), epic);
+        SubTask subTask1 = taskManager.createSubTask(new SubTask("newSubtask2", "task2"), epic);
 
         out.println("Create SubTask2: " + subTask1);
         out.println("Задачи:");

@@ -1,11 +1,0 @@
-
-’
-java:S1192"ODefine a constant instead of duplicating this literal "newDescription" 3 times.(¬ù¬‹8¨´­ùô1J$2638dc77-81d9-46a8-82b6-3864e3f3cb77
-…
-java:S1128"=Remove this unused import 'org.junit.jupiter.api.Assertions'.(œ³«õøÿÿÿÿ8ÇÞ®ùô1J$386c2b45-81ae-423a-a185-b02ad94c8dbf
-
-java:S1128"<Remove this unused import 'org.junit.jupiter.api.BeforeAll'.(—¦¹î8ÇÞ®ùô1J$e1391fe6-882f-4783-a251-a61bc5d5708a
-q
-java:S1128".Remove this unused import 'java.util.Objects'.(¼¸õ›8ÇÞ®ùô1J$b6619f1a-1bd0-4fe7-a210-1acf95f38cc4
-n
-java:S5960"+Remove this assertion from production code.(ØŠþ˜8½´­ùô1J$710845f2-c200-4214-967f-e0fda455524b
