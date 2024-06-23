@@ -27,7 +27,7 @@ public class InMemoryTaskManager implements TaskManager {
         for (SubTask check : epic.getSubtasks()) {
             int allSubTasks = 0;
 
-            if(check.getStatus().equals("DOWN")) {
+            if (check.getStatus().equals("DOWN")) {
                 allSubTasks++;
 
                 if (epic.getSubtasks().size() == allSubTasks) {
