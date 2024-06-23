@@ -1,19 +1,18 @@
-package tests.servicetests;
+package test.servicetests;
 
 import model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import service.InMemoryHistoryManager;
 import service.Managers;
-
 import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
     InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
     Task task = new Task("newTask", "newDecription");
-
 
     @Test
     void add() {

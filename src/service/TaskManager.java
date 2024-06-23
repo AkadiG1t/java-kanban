@@ -26,7 +26,7 @@ public interface TaskManager {
 
     void deleteEpics();
 
-    void deleteEpic(int id);
+    void removeEpic(int id);
 
     void updateEpic(Epic epic);
 
