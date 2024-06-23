@@ -30,7 +30,7 @@ public class InMemoryTaskManager implements TaskManager {
             if(check.getStatus().equals("DOWN")) {
                 allSubTasks++;
 
-                if(epic.getSubtasks().size() == allSubTasks) {
+                if (epic.getSubtasks().size() == allSubTasks) {
                     epic.setStatus(String.valueOf(Status.DONE));
                 } else if (allSubTasks == 0) {
                     epic.setStatus(String.valueOf(Status.NEW));
@@ -72,7 +72,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Task updateTask(Task task) {
 
-        if (tasks.containsValue(task)){
+        if (tasks.containsValue(task)) {
             tasks.put(task.getId(), task);
         }
         return task;
@@ -89,7 +89,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Epic getEpic (int id) {
+    public Epic getEpic(int id) {
         historyManager.add(epics.get(id));
         return epics.get(id);
     }
@@ -106,7 +106,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeEpic(int id) {
-        for(Integer search : epics.keySet()) {
+        for (Integer search : epics.keySet()) {
             if (search == id) {
                 epics.get(id).getSubtasks().clear();
             }
@@ -140,7 +140,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void deleteAllSubTasks() {
         subTasks.clear();
 
-        for(Epic epic : epics.values()) {
+        for (Epic epic : epics.values()) {
             epic.getSubtasks().clear();
             checkEpicStatus(epic);
         }
