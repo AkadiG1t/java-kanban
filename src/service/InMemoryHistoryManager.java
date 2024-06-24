@@ -28,7 +28,6 @@ public class InMemoryHistoryManager implements HistoryManager {
         final Node<Task> f = first;
         final Node<Task> newNode = new Node<>(null, task, f);
         first = newNode;
-
         if (f == null) {
             last = newNode;
         } else {
