@@ -11,13 +11,14 @@ public class InMemoryHistoryManager implements HistoryManager {
         Task element;
         Node<T> next;
         Node<T> prev;
+
         Node(Node<T> prev, Task element, Node<T> next) {
             this.element = element;
             this.next = next;
             this.prev = prev;
         }
-
     }
+
     private final ArrayList<Task> tasks = new ArrayList<>();
     private final HashMap<Integer, Node<Task>> map = new HashMap<>();
     Node<Task> first;
@@ -46,6 +47,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             tasks.add(node.element);
         }
     }
+
     private void removeNode(Node<Task> node) {
         map.remove(node.element.getId());
     }
