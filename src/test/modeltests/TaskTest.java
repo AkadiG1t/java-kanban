@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
     InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(Managers.getDefaultHistory());
+
     @Test
     void addNewTask() {
         Task task = new Task("Test addNewTask", "Test addNewTask description");
