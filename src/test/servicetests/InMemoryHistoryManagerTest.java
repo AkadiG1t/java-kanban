@@ -23,12 +23,10 @@ class InMemoryHistoryManagerTest {
     }
 
     static class ManagersTest {
-    
         @Test
         void getDefault() {
             Assertions.assertNotNull(Managers.getDefault());
         }
-    
         @Test
         void getDefaultHistory() {
             Assertions.assertNotNull(Managers.getDefaultHistory());
