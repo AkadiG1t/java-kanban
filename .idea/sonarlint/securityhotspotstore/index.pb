@@ -2742,3 +2742,7 @@ w
 G.idea/sonarlint/issuestore/c/7/c7d1ab2ff5782fed3c7938f5db1742887aba363a,3\a\3ad64f8e15327eec4fec14e8f4c1d0db3e7376c4
 w
 G.idea/sonarlint/issuestore/c/7/c73acde6322229283b103aeb24ff680aeea29a95,b\2\b298eb9d85572e3e7e513b1cd6b345a7a71a4200
+U
+%src/test/modeltests/ManagersTest.java,2\c\2c3128d45e2fdfeec73f40f115945b5f32e5f1c1
+W
+'src/test/servicetests/ManagersTest.java,1\1\113496d161b09c706873a09dcde82fc868395f7c

@@ -1,10 +1,9 @@
 package test.servicetests;
 
 import model.Task;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 import service.InMemoryHistoryManager;
-import service.Managers;
 import java.util.List;
 
 
@@ -20,17 +19,5 @@ class InMemoryHistoryManagerTest {
         final List<Task> history = inMemoryHistoryManager.getHistory();
         assertNotNull(history);
         assertEquals(1, history.size());
-    }
-
-    static class ManagersTest {
-        @Test
-        void getDefault() {
-            Assertions.assertNotNull(Managers.getDefault());
-        }
-
-        @Test
-        void getDefaultHistory() {
-            Assertions.assertNotNull(Managers.getDefaultHistory());
-        }
     }
 }
