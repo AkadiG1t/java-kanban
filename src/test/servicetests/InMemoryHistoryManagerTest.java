@@ -27,6 +27,7 @@ class InMemoryHistoryManagerTest {
         void getDefault() {
             Assertions.assertNotNull(Managers.getDefault());
         }
+
         @Test
         void getDefaultHistory() {
             Assertions.assertNotNull(Managers.getDefaultHistory());
