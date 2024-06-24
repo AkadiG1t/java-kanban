@@ -23,11 +23,11 @@ public class InMemoryHistoryManager implements HistoryManager {
     private final HashMap<Integer, Node<Task>> map = new HashMap<>();
     Node<Task> first;
     Node<Task> last;
-
     private void linkLast(Task task) {
         final Node<Task> f = first;
         final Node<Task> newNode = new Node<>(null, task, f);
         first = newNode;
+
         if (f == null) {
             last = newNode;
         } else {
