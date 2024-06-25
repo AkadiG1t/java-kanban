@@ -27,7 +27,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     @Override
     public void add(Task task) {
 
-        if(task != null) {
+        if (task != null) {
             linkLast(task);
             map.put(task.getId(), new Node<>(first, task, last));
         }
