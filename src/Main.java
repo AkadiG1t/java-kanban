@@ -1,5 +1,4 @@
 import model.Epic;
-import model.Status;
 import model.SubTask;
 import model.Task;
 import service.Managers;
@@ -38,7 +37,10 @@ public class Main {
         out.println(taskManager.getAllSubTasks());
 
         taskManager.getTask(1);
+        taskManager.getTask(1);
         taskManager.getEpic(2);
+        taskManager.getEpic(2);
+        taskManager.getSubtask(4);
         taskManager.getSubtask(4);
 
         out.println("История:");

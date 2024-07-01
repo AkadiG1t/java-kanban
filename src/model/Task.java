@@ -13,8 +13,6 @@ public class Task {
         this.description = description;
     }
 
-
-
     public String getName() {
         return name;
     }
@@ -46,7 +44,6 @@ public class Task {
     public void setId(int id) {
         this.id = id;
     }
-
 
     @Override
     public String toString() {
