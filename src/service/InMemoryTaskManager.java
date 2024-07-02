@@ -16,11 +16,11 @@ public class InMemoryTaskManager implements TaskManager {
     final Map<Integer, Epic> epics = new HashMap<>();
     final Map<Integer, SubTask> subTasks = new HashMap<>();
     private final HistoryManager historyManager;
+    private int id = 0;
 
     public InMemoryTaskManager(HistoryManager historyManager) {
         this.historyManager = historyManager;
     }
-    private int id = 0;
 
     private int generateID() {
         return ++id;
@@ -69,7 +69,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Task getTask(int id) {
 
-        if(tasks.containsKey(id)) {
+        if (tasks.containsKey(id)) {
             historyManager.add(tasks.get(id));
             return tasks.get(id);
         } else {
@@ -122,7 +122,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeEpic(int id) {
-        if(epics.containsKey(id)) {
+        if (epics.containsKey(id)) {
             for (Integer search : epics.keySet()) {
                 if (search == id) {
                     epics.get(id).getSubtasks().clear();
