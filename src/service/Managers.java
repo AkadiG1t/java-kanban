@@ -10,8 +10,7 @@ public class Managers {
     }
 
     public static TaskManager getDefault() {
-        return FileBackedTaskManager.loadFromFile
-                (new File("resources/task.csv"));
+        return FileBackedTaskManager.loadFromFile(new File("resources/task.csv"));
     }
 
     public static HistoryManager getDefaultHistory() {
