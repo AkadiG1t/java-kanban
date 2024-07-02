@@ -1,4 +1,4 @@
-package test.modeltests;
+package modeltest;
 
 import model.Epic;
 import model.SubTask;
@@ -15,13 +15,14 @@ class EpicTestId {
     Task epic2 = new Epic("newEpic2", "newDescription2");
 
     @Test
-    public void epicEquals() {
+    void epicEquals() {
         epic.setId(1);
         epic2.setId(1);
         Assertions.assertEquals(epic, epic2);
     }
 
     static class InMemoryTaskManagerTest {
+
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(Managers.getDefaultHistory());
         Task task = inMemoryTaskManager.createTask(new Task("newTask", "newDescription1"));
         Epic epic = inMemoryTaskManager.createEpic(new Epic("newEpic", "newDescription2"));

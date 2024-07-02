@@ -1,4 +1,4 @@
-package test.servicetests;
+package servicetest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import service.Managers;

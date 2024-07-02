@@ -1,4 +1,4 @@
-package test.modeltests;
+package modeltest;
 
 import model.Task;
 import org.junit.jupiter.api.Assertions;
@@ -11,7 +11,7 @@ class TaskTestId {
 
 
     @Test
-    public void taskEquals() {
+    void taskEquals() {
         task.setId(1);
         task2.setId(1);
         Assertions.assertEquals(task, task2);

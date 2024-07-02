@@ -1,4 +1,4 @@
-package test.modeltests;
+package modeltest;
 
 import model.SubTask;
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +9,7 @@ class SubTaskTestId {
     SubTask subTask2 = new SubTask("new subTask", "task");
 
     @Test
-    public void epicEquals() {
+    void epicEquals() {
         subTask.setId(1);
         subTask2.setId(1);
         Assertions.assertEquals(subTask, subTask2);
