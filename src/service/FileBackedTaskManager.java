@@ -16,7 +16,7 @@ import java.util.Map;
 
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
-    File file;
+    private final File file;
 
     public FileBackedTaskManager(File file, HistoryManager historyManager) {
         super(historyManager);
@@ -41,8 +41,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         super.createTask(task);
         save();
         return task;
+        }
 
-    }
 
     @Override
     public Task updateTask(Task task) {
