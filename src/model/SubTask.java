@@ -9,6 +9,15 @@ public class SubTask extends Task {
         super(name, description);
     }
 
+    @Override
+    public Type getType() {
+        return Type.SUBTASK;
+    }
+
+    @Override
+    public Integer getEpicId() {
+        return epic.getId();
+    }
 
     public void setEpic(Epic epic) {
         this.epic = epic;

@@ -5,12 +5,22 @@ import java.util.Objects;
 public class Task {
     private String name;
     private String description;
-    private String status = String.valueOf(Status.NEW);
+    private Status status = Status.NEW;
     private int id;
+    private final Type type = Type.TASK;
+    private int epic;
 
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Integer getEpicId() {
+        return null;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public String getName() {
@@ -29,11 +39,11 @@ public class Task {
         this.description = description;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

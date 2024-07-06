@@ -1,4 +1,4 @@
-package test.servicetests;
+package servicetest;
 
 import model.Task;
 
