@@ -20,4 +20,10 @@ class InMemoryHistoryManagerTest {
         assertNotNull(history);
         assertEquals(1, history.size());
     }
+
+    @Test
+    void getHistory() {
+        assertNotNull(inMemoryHistoryManager);
+    }
 }
+

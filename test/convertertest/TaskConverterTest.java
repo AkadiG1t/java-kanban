@@ -8,15 +8,19 @@ import service.InMemoryHistoryManager;
 import service.InMemoryTaskManager;
 import service.TaskManager;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
 class TaskConverterTest {
     TaskManager taskManager = new InMemoryTaskManager(new InMemoryHistoryManager());
 
     @Test
     void toStringTest() {
-        Task task = taskManager.createTask(new Task("name", "desc"));
+        Task task = taskManager.createTask(new Task("name", "desc", Duration.of(20, ChronoUnit.MINUTES)));
         String stringTask = task.getId() + "," + task.getType().toString() + "," + task.getName() + "," +
                 task.getStatus().toString() + "," +
-                task.getDescription() + "," + task.getEpicId();
+                task.getDescription() + "," + task.getEpicId() + "," + task.getStartTime() + "," + task.getEndTime()
+                + task.getDuration().toMinutes();
         Assertions.assertEquals(TaskConverter.toString(task), stringTask);
     }
 
