@@ -13,16 +13,18 @@ public class Main {
         TaskManager taskManager = Managers.getDefault();
 
 
-        Task task = taskManager.createTask(new Task("newTask", "newDescription"));
+        Task task = taskManager.createTask(new Task("newTask", "newDescription", Duration.ZERO));
 
         out.println("Create task " + task);
 
         Epic epic = taskManager.createEpic(new Epic("Новый Эпик", "Описание эпика"));
         out.println("Create epic: " + epic);
 
-        Task subTask = taskManager.createSubTask(new SubTask("new subTask1", "task", Duration.ZERO), epic);
+        Task subTask = taskManager.createSubTask(new SubTask("new subTask1", "task", Duration.ZERO
+                , epic));
         out.println("Create SubTask: " + subTask);
-        SubTask subTask1 = taskManager.createSubTask(new SubTask("newSubtask2", "task2", Duration.ZERO), epic);
+        SubTask subTask1 = taskManager.createSubTask(new SubTask("newSubtask2", "task2", Duration.ZERO
+                , epic));
 
         out.println("Create SubTask2: " + subTask1);
         out.println("Задачи:");
@@ -34,14 +36,9 @@ public class Main {
         out.println("--> " + taskManager.getAllSubTasksForEpic(epic));
 
         out.println("Подзадачи:");
-        out.println(taskManager.getAllSubTasks());
+        out.println(taskManager.getAllSubTasks()  + " " + epic.getSubtasks());
 
-        taskManager.getTask(1);
-        taskManager.getTask(1);
-        taskManager.getEpic(2);
-        taskManager.getEpic(2);
-        taskManager.getSubtask(4);
-        taskManager.getSubtask(4);
+
 
         out.println("История:");
         out.println(taskManager.getHistory());
