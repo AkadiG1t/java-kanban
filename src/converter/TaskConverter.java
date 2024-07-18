@@ -5,6 +5,10 @@ import model.SubTask;
 import model.Task;
 import service.TaskManager;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class TaskConverter {
 
     private TaskConverter() {
@@ -12,32 +16,43 @@ public class TaskConverter {
     }
 
     public static String toString(Task task) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         return task.getId() + "," + task.getType() + "," + task.getName() + "," +
                 task.getStatus() + "," +
-                task.getDescription() + "," + task.getEpicId();
+                task.getDescription() + "," + task.getEpicId() + "," + task.getStartTime().format(dateTimeFormatter)
+                + "," + task.getDuration().toMinutes();
     }
 
     public static Task fromString(String value, TaskManager taskManager) {
-        Task task = null;
+        Task task;
         String[] classFromString = value.split(",");
+        Long dur = Long.parseLong(classFromString[7]);
+        Duration duration = Duration.ofMinutes(dur);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(classFromString[6], dateTimeFormatter);
 
         switch (classFromString[1]) {
             case "TASK" -> {
-                task = taskManager.createTask(new Task(classFromString[2], classFromString[4]));
+                task = taskManager.createTask(new Task(classFromString[2], classFromString[4]
+                        ,duration));
+                task.setStartTime(dateTime);
                 task.setId(Integer.parseInt(classFromString[0]));
                 task.setStatus(Status.valueOf(classFromString[3]));
             }
             case "EPIC" -> {
-                Epic epic = taskManager.createEpic(new Epic(classFromString[2], classFromString[4]));
+                Task epic = taskManager.createEpic(new Epic(classFromString[2], classFromString[4]));
                 epic.setId(Integer.parseInt(classFromString[0]));
                 epic.setStatus(Status.valueOf(classFromString[3]));
+                epic.setStartTime(dateTime);
                 task = epic;
 
             }
             default -> {
-                SubTask subTask = taskManager.createSubTask(new SubTask(classFromString[2], classFromString[4]),
+                Task subTask = taskManager.createSubTask(new SubTask(classFromString[2],
+                                classFromString[4], Duration.parse(classFromString[7])),
                         taskManager.getEpic(Integer.parseInt(classFromString[5])));
+                subTask.setStartTime(dateTime);
                 subTask.setId(Integer.parseInt(classFromString[0]));
                 subTask.setStatus(Status.valueOf(classFromString[3]));
                 task = subTask;
