@@ -27,9 +27,11 @@ public class Task {
         startTime = LocalDateTime.now();
         this.duration = Objects.requireNonNullElse(duration, Duration.ZERO);
     }
+
     public LocalDateTime getEndTime() {
         return startTime.plusMinutes(duration.toMinutes());
     }
+
     public Integer getEpicId() {
         return null;
     }

@@ -18,7 +18,8 @@ class TaskConverterTest {
     @Test
     void toStringTest() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
-        Task task = taskManager.createTask(new Task("name", "desc", Duration.of(20, ChronoUnit.MINUTES)));
+        Task task = taskManager.createTask(new Task("name", "desc", Duration.of(20
+                , ChronoUnit.MINUTES)));
         String stringTask = task.getId() + "," + task.getType().toString() + "," + task.getName() + "," +
                 task.getStatus().toString() + "," +
                 task.getDescription() + "," + task.getEpicId() + "," + task.getStartTime().format(dateTimeFormatter)
@@ -28,7 +29,7 @@ class TaskConverterTest {
 
     @Test
     void fromStringTest() {
-        Assertions.assertNotNull(TaskConverter.fromString("4,TASK,newTask,NEW,newDesc,null,18.07.2024 14:55:35,20",
-                taskManager));
+        Assertions.assertNotNull(TaskConverter.fromString("4,TASK,newTask,NEW,newDesc,null,18.07.2024 14:55:35,20"
+                , taskManager));
     }
 }
