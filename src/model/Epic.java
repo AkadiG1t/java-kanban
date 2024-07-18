@@ -1,13 +1,39 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.*;
 
 
 public class Epic extends Task {
     private final List<SubTask> subtasks = new ArrayList<>();
+
+    public Epic(String name, String description) {
+        super(name, description);
+    }
+
+    @Override
+    public Duration getDuration() {
+        return subtasks.stream()
+                .map(SubTask::getDuration)
+                .reduce(Duration.ZERO, Duration::plus);
+    }
+
+    @Override
+    public LocalDateTime getStartTime() {
+        Optional<LocalDateTime> optionalLocalDateTimeTask = subtasks.stream()
+                .map(SubTask::getStartTime)
+                .min(LocalDateTime::compareTo);
+        return optionalLocalDateTimeTask.orElse(null);
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
+        Optional<LocalDateTime> optionalLocalDateTime = subtasks.stream()
+                .map(SubTask::getEndTime)
+                .max(LocalDateTime::compareTo);
+        return optionalLocalDateTime.orElse(null);
+    }
 
     @Override
     public Type getType() {
@@ -19,12 +45,10 @@ public class Epic extends Task {
         return getId();
     }
 
-    public Epic(String name, String description) {
-        super(name, description);
-    }
+
 
     public List<SubTask> getSubtasks() {
-        return subtasks;
+        return new ArrayList<>(subtasks);
     }
 
     public void addSubTask(SubTask subTask) {
