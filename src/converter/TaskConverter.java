@@ -34,8 +34,7 @@ public class TaskConverter {
 
         switch (classFromString[1]) {
             case "TASK" -> {
-                task = taskManager.createTask(new Task(classFromString[2], classFromString[4]
-                        ,duration));
+                task = taskManager.createTask(new Task(classFromString[2], classFromString[4], duration));
                 task.setStartTime(dateTime);
                 task.setId(Integer.parseInt(classFromString[0]));
                 task.setStatus(Status.valueOf(classFromString[3]));
