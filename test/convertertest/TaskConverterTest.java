@@ -17,7 +17,7 @@ class TaskConverterTest {
 
     @Test
     void toStringTest() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         Task task = taskManager.createTask(new Task("name", "desc", Duration.of(20, ChronoUnit.MINUTES)));
         String stringTask = task.getId() + "," + task.getType().toString() + "," + task.getName() + "," +
                 task.getStatus().toString() + "," +

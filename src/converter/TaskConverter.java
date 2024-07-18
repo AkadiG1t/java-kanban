@@ -16,11 +16,12 @@ public class TaskConverter {
     }
 
     public static String toString(Task task) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        String dateTime = task.getStartTime().format(dateTimeFormatter);
 
         return task.getId() + "," + task.getType() + "," + task.getName() + "," +
                 task.getStatus() + "," +
-                task.getDescription() + "," + task.getEpicId() + "," + task.getStartTime().format(dateTimeFormatter)
+                task.getDescription() + "," + task.getEpicId() + "," + dateTime
                 + "," + task.getDuration().toMinutes();
     }
 
