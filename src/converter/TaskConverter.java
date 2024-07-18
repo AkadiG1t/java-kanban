@@ -65,15 +65,15 @@ public class TaskConverter {
                 }
 
             } case "SUBTASK" -> {
-                    SubTask subTask = taskManager.createSubTask(new SubTask(classFromString[2], classFromString[4]
-                        , duration));
+                    SubTask subTask = taskManager.createSubTask(new SubTask(classFromString[2], classFromString[4],
+                            duration));
                     subTask.setId(Integer.parseInt(classFromString[0]));
                     subTask.setStatus(Status.valueOf(classFromString[3]));
                     subTask.setStartTime(dateTime);
                     task = subTask;
 
                     int epicId = Integer.parseInt(classFromString[5]);
-                    for (Epic epic : taskManager.getEpics()){
+                    for (Epic epic : taskManager.getEpics()) {
                         if (epic.getId() == epicId) {
                             subTask.setEpic(epic);
                             epic.addSubTask(subTask);
