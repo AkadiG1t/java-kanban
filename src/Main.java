@@ -1,3 +1,11 @@
+import model.Task;
+import service.InMemoryHistoryManager;
+import service.InMemoryTaskManager;
+import service.Managers;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
 import model.Epic;
 import model.SubTask;
 import model.Task;
@@ -20,9 +28,9 @@ public class Main {
         Epic epic = taskManager.createEpic(new Epic("Новый Эпик", "Описание эпика"));
         out.println("Create epic: " + epic);
 
-        Task subTask = taskManager.createSubTask(new SubTask("new subTask1", "task"), epic);
+        Task subTask = taskManager.createSubTask(new SubTask("new subTask1", "task", Duration.ZERO), epic);
         out.println("Create SubTask: " + subTask);
-        SubTask subTask1 = taskManager.createSubTask(new SubTask("newSubtask2", "task2"), epic);
+        SubTask subTask1 = taskManager.createSubTask(new SubTask("newSubtask2", "task2", Duration.ZERO), epic);
 
         out.println("Create SubTask2: " + subTask1);
         out.println("Задачи:");
@@ -47,5 +55,3 @@ public class Main {
         out.println(taskManager.getHistory());
     }
 }
-
-
