@@ -12,6 +12,12 @@ public class SubTask extends Task {
         setStartTime(LocalDateTime.now());
     }
 
+    public SubTask(String name, String description, Duration duration, Epic epic) {
+        super(name, description, duration);
+        setStartTime(LocalDateTime.now());
+        this.epic = epic;
+    }
+
     @Override
     public Type getType() {
         return Type.SUBTASK;

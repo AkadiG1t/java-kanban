@@ -214,18 +214,18 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public SubTask createSubTask(SubTask subTask, Epic epic) {
+    public SubTask createSubTask(SubTask subTask) {
         if (subTask == null) {
             return null;
         }
         subTask.setId(generateID());
         subTask.setStatus(Status.NEW);
         subTasks.put(subTask.getId(), subTask);
-        subTask.setEpic(epic);
-        epic.addSubTask(subTask);
-        checkEpicStatus(epic);
-        addToPrioritized(subTask);
-        addToPrioritized(subTask.getEpic());
+
+        if (subTask.getEpic() != null) {
+            subTask.getEpic().addSubTask(subTask);
+            addToPrioritized(subTask.getEpic());
+        }
         return subTask;
     }
 

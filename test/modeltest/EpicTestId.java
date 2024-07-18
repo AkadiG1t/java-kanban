@@ -27,8 +27,10 @@ class EpicTest {
         inMemoryTaskManager = new InMemoryTaskManager(new InMemoryHistoryManager());
         epic = new Epic("Epic Task", "Epic Description");
         inMemoryTaskManager.createEpic(epic);
-        subTask = inMemoryTaskManager.createSubTask(new SubTask("SubTask 1", "Description 1", Duration.ZERO), epic);
-        subTask1 = inMemoryTaskManager.createSubTask(new SubTask("SubTask 2", "Description 2", Duration.ZERO), epic);
+        subTask = inMemoryTaskManager.createSubTask(new SubTask("SubTask 1", "Description 1"
+                , Duration.ZERO, epic));
+        subTask1 = inMemoryTaskManager.createSubTask(new SubTask("SubTask 2", "Description 2"
+                , Duration.ZERO, epic));
     }
 
     @Test

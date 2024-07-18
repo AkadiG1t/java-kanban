@@ -1,4 +1,5 @@
 package converter;
+import exception.NotFoundException;
 import model.Epic;
 import model.Status;
 import model.SubTask;
@@ -8,8 +9,13 @@ import service.TaskManager;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TaskConverter {
+    private static final Map<Integer, List<SubTask>> tempSubTaskMap = new HashMap<>();
+
 
     private TaskConverter() {
 
@@ -30,7 +36,6 @@ public class TaskConverter {
         long dur = Long.parseLong(classFromString[7]);
         Duration duration = Duration.ofMinutes(dur);
 
-
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(classFromString[6], dateTimeFormatter);
 
@@ -40,24 +45,46 @@ public class TaskConverter {
                 task.setStartTime(dateTime);
                 task.setId(Integer.parseInt(classFromString[0]));
                 task.setStatus(Status.valueOf(classFromString[3]));
-            }
-            case "EPIC" -> {
-                Task epic = taskManager.createEpic(new Epic(classFromString[2], classFromString[4]));
+
+            } case "EPIC" -> {
+                Epic epic = new Epic(classFromString[2], classFromString[4]);
                 epic.setId(Integer.parseInt(classFromString[0]));
                 epic.setStatus(Status.valueOf(classFromString[3]));
                 epic.setStartTime(dateTime);
                 task = epic;
 
-            }
-            default -> {
-                Task subTask = taskManager.createSubTask(new SubTask(classFromString[2],
-                                classFromString[4], duration),
-                        taskManager.getEpic(Integer.parseInt(classFromString[5])));
-                subTask.setStartTime(dateTime);
-                subTask.setId(Integer.parseInt(classFromString[0]));
-                subTask.setStatus(Status.valueOf(classFromString[3]));
-                task = subTask;
-            }
+                Integer epicId = epic.getId();
+                if (tempSubTaskMap.containsKey(epicId)) {
+                    List<SubTask> subTasks = tempSubTaskMap.get(epicId);
+
+                       for (SubTask subTask : subTasks) {
+                            epic.addSubTask(subTask);
+                       }
+
+                        tempSubTaskMap.remove(epicId);
+                }
+
+            } case "SUBTASK" -> {
+                    SubTask subTask = taskManager.createSubTask(new SubTask(classFromString[2], classFromString[4]
+                        , duration));
+                    subTask.setId(Integer.parseInt(classFromString[0]));
+                    subTask.setStatus(Status.valueOf(classFromString[3]));
+                    subTask.setStartTime(dateTime);
+                    task = subTask;
+
+                    int epicId = Integer.parseInt(classFromString[5]);
+                    for (Epic epic : taskManager.getEpics()){
+                        if (epic.getId() == epicId) {
+                            subTask.setEpic(epic);
+                            epic.addSubTask(subTask);
+                        } else {
+                            tempSubTaskMap.keySet().stream()
+                                    .filter(key -> key == epicId)
+                                    .forEach(key -> tempSubTaskMap.get(key).add(subTask));
+                    }
+                }
+            } default -> throw new NotFoundException("Обнаружен новый объект");
+
         }
 
         return task;

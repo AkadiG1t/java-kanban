@@ -42,7 +42,7 @@ public interface TaskManager {
 
     SubTask getSubtask(int id);
 
-    SubTask createSubTask(SubTask subTask, Epic epic);
+    SubTask createSubTask(SubTask subTask);
 
     void updateSubTasks(SubTask subTask);
 

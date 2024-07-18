@@ -10,7 +10,7 @@ import java.nio.file.Files;
 
  class FileBackedTaskManageTest {
 
-    File file = Files.createTempFile("test", ".csv").toFile();
+    File file = Files.createTempFile("task", ".csv").toFile();
     FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(file, new InMemoryHistoryManager());
 
 

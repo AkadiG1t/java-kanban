@@ -14,15 +14,14 @@ import java.time.temporal.ChronoUnit;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class InMemoryTaskManagerTests {
+class InMemoryTaskManagerTests {
 
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(Managers.getDefaultHistory());
 
         Task task = inMemoryTaskManager.createTask(new Task("newTask", "newDescription1"));
         Epic epic = inMemoryTaskManager.createEpic(new Epic("newEpic", "newDescription2"));
         SubTask subTask = inMemoryTaskManager.createSubTask(new SubTask("newSubTask", "newDescription3",
-                        Duration.of(20, ChronoUnit.MINUTES)),
-                epic);
+                        Duration.of(20, ChronoUnit.MINUTES), epic));
 
         @Test
         void createTask() {
@@ -147,7 +146,7 @@ public class InMemoryTaskManagerTests {
         @Test
         void updateSubTasks() {
             SubTask subTask1 = inMemoryTaskManager.createSubTask(new SubTask("NewSubTask"
-                    , subTask.getDescription(), subTask.getDuration()), epic);
+                    , subTask.getDescription(), subTask.getDuration(), epic));
             subTask1.setStatus(Status.DONE);
             inMemoryTaskManager.updateSubTasks(subTask1);
             assertNotEquals(subTask1, subTask);
