@@ -15,8 +15,7 @@ public class InMemoryTaskManager implements TaskManager {
     final Map<Integer, Epic> epics = new HashMap<>();
     final Map<Integer, SubTask> subTasks = new HashMap<>();
     private final HistoryManager historyManager;
-    private final TreeSet<Task> prioritizeTask = new TreeSet<>
-            ((o1, o2) -> o1.getStartTime().compareTo(o2.getStartTime()));
+    private final TreeSet<Task> prioritizeTask = new TreeSet<>((o1, o2) -> o1.getStartTime().compareTo(o2.getStartTime()));
     private int id = 0;
 
     public InMemoryTaskManager(HistoryManager historyManager) {
@@ -43,7 +42,6 @@ public class InMemoryTaskManager implements TaskManager {
         } else {
             epic.setStatus(Status.IN_PROGRESS);
         }
-
     }
 
 
@@ -268,7 +266,9 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     public void addToPrioritized(Task task) {
+
         if (task.getStartTime() != null && !task.getDuration().isZero() && prioritizeTask.size() > 1){
+
             if (!checkOverlayTime(task)) {
                 prioritizeTask.remove(task);
                 prioritizeTask.add(task);
