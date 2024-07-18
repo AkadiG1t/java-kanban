@@ -2,6 +2,7 @@ package model;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Task {
@@ -79,11 +80,6 @@ public class Task {
     public Duration getDuration() {
         return duration;
     }
-
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
-
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
@@ -97,8 +93,8 @@ public class Task {
                 ", id=" + id +
                 ", type=" + type +
                 ", epic=" + epic +
-                ", duration=" + duration +
-                ", startTime=" + startTime +
+                ", duration=" + duration.toMinutes() +
+                ", startTime=" + startTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) +
                 '}';
     }
 

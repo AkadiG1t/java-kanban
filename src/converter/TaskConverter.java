@@ -20,8 +20,7 @@ public class TaskConverter {
         String dateTime = task.getStartTime().format(dateTimeFormatter);
 
         return task.getId() + "," + task.getType() + "," + task.getName() + "," +
-                task.getStatus() + "," +
-                task.getDescription() + "," + task.getEpicId() + "," + dateTime
+                task.getStatus() + "," + task.getDescription() + "," + task.getEpicId() + "," + dateTime
                 + "," + task.getDuration().toMinutes();
     }
 
@@ -30,6 +29,8 @@ public class TaskConverter {
         String[] classFromString = value.split(",");
         long dur = Long.parseLong(classFromString[7]);
         Duration duration = Duration.ofMinutes(dur);
+
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(classFromString[6], dateTimeFormatter);
 
@@ -50,7 +51,7 @@ public class TaskConverter {
             }
             default -> {
                 Task subTask = taskManager.createSubTask(new SubTask(classFromString[2],
-                                classFromString[4], Duration.parse(classFromString[7])),
+                                classFromString[4], duration),
                         taskManager.getEpic(Integer.parseInt(classFromString[5])));
                 subTask.setStartTime(dateTime);
                 subTask.setId(Integer.parseInt(classFromString[0]));

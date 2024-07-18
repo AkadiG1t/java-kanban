@@ -10,13 +10,17 @@ public class Epic extends Task {
 
     public Epic(String name, String description) {
         super(name, description);
+
     }
 
     @Override
     public Duration getDuration() {
-        return subtasks.stream()
-                .map(SubTask::getDuration)
-                .reduce(Duration.ZERO, Duration::plus);
+        if (!subtasks.isEmpty()) {
+            return subtasks.stream()
+                    .map(SubTask::getDuration)
+                    .reduce(Duration.ZERO, Duration::plus);
+        }
+        return Duration.ZERO;
     }
 
     @Override
@@ -24,7 +28,7 @@ public class Epic extends Task {
         Optional<LocalDateTime> optionalLocalDateTimeTask = subtasks.stream()
                 .map(SubTask::getStartTime)
                 .min(LocalDateTime::compareTo);
-        return optionalLocalDateTimeTask.orElse(null);
+        return optionalLocalDateTimeTask.orElse(LocalDateTime.now());
     }
 
     @Override
