@@ -266,8 +266,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     public void addToPrioritized(Task task) {
-
-        if (task.getStartTime() != null && !task.getDuration().isZero() && prioritizeTask.size() > 1){
+        if (task.getStartTime() != null && !task.getDuration().isZero() && prioritizeTask.size() > 1) {
 
             if (!checkOverlayTime(task)) {
                 prioritizeTask.remove(task);
