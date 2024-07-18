@@ -27,7 +27,7 @@ public class TaskConverter {
     public static Task fromString(String value, TaskManager taskManager) {
         Task task;
         String[] classFromString = value.split(",");
-        Long dur = Long.parseLong(classFromString[7]);
+        long dur = Long.parseLong(classFromString[7]);
         Duration duration = Duration.ofMinutes(dur);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(classFromString[6], dateTimeFormatter);
