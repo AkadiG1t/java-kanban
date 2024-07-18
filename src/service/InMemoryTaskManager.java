@@ -84,7 +84,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Task updateTask(Task task) {
+    public void updateTask(Task task) {
         if (tasks.containsValue(task)) {
             tasks.put(task.getId(), task);
             checkOverlayTime(task);
@@ -92,7 +92,6 @@ public class InMemoryTaskManager implements TaskManager {
         } else {
             throw new NotFoundException("Задача не найдена");
         }
-        return task;
     }
 
     @Override
@@ -149,7 +148,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Epic updateEpic(Epic epic) {
+    public void updateEpic(Epic epic) {
         Epic saved = epics.get(epic.getId());
 
         if (saved == null) {
@@ -162,8 +161,6 @@ public class InMemoryTaskManager implements TaskManager {
         addToPrioritized(saved);
         epics.put(epic.getEpicId(), saved);
         checkEpicStatus(saved);
-
-        return saved;
     }
 
     @Override
@@ -233,7 +230,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public SubTask updateSubTasks(SubTask subTask) {
+    public void updateSubTasks(SubTask subTask) {
         SubTask saved = subTasks.get(subTask.getId());
         if (saved == null) {
             throw new NotFoundException("Подзадача не найдена");
@@ -248,8 +245,6 @@ public class InMemoryTaskManager implements TaskManager {
             addToPrioritized(saved);
             subTasks.put(saved.getId(), saved);
             checkEpicStatus(saved.getEpic());
-
-            return saved;
         }
     }
 
