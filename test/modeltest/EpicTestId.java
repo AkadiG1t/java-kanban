@@ -1,62 +1,64 @@
 package modeltest;
 
 import model.Epic;
+import model.Status;
 import model.SubTask;
-import model.Task;
 import org.junit.jupiter.api.Assertions;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import service.InMemoryHistoryManager;
 import service.InMemoryTaskManager;
-import service.Managers;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.time.Duration;
 
-class EpicTestId {
-    Epic epic = new Epic("newEpic1", "newDescription1");
-    Task epic2 = new Epic("newEpic2", "newDescription2");
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class EpicTest {
+    Epic epic;
+    Epic epic2 = new Epic("newEpic2", "newDescription2");
+    SubTask subTask;
+    SubTask subTask1;
+    InMemoryTaskManager inMemoryTaskManager;
+
+    @BeforeEach
+    public void init() {
+        inMemoryTaskManager = new InMemoryTaskManager(new InMemoryHistoryManager());
+        epic = new Epic("Epic Task", "Epic Description");
+        inMemoryTaskManager.createEpic(epic);
+        subTask = inMemoryTaskManager.createSubTask(new SubTask("SubTask 1", "Description 1"
+                , Duration.ZERO, epic));
+        subTask1 = inMemoryTaskManager.createSubTask(new SubTask("SubTask 2", "Description 2"
+                , Duration.ZERO, epic));
+    }
 
     @Test
     void epicEquals() {
         epic.setId(1);
         epic2.setId(1);
-        Assertions.assertEquals(epic, epic2);
+        Assertions.assertNotEquals(epic, epic2);
     }
 
-    static class InMemoryTaskManagerTest {
+    @Test
+    void epicNEWStatusOfAllSubtasks() {
+        inMemoryTaskManager.updateEpic(epic);
+        assertEquals(Status.NEW, epic.getStatus());
 
-        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(Managers.getDefaultHistory());
-        Task task = inMemoryTaskManager.createTask(new Task("newTask", "newDescription1"));
-        Epic epic = inMemoryTaskManager.createEpic(new Epic("newEpic", "newDescription2"));
-        Task subTask = inMemoryTaskManager.createSubTask(new SubTask("newSubTask", "newDescription3"),
-                epic);
-
-        @Test
-        void createTask() {
-            assertNotNull(task);
-        }
-
-        @Test
-        void getTask() {
-            assertNotNull(inMemoryTaskManager.getTask(task.getId()));
-        }
-
-        @Test
-        void createEpic() {
-            assertNotNull(epic);
-        }
-
-        @Test
-        void getEpic() {
-            assertNotNull(inMemoryTaskManager.getEpic(epic.getId()));
-        }
-
-        @Test
-        void getSubtask() {
-            assertNotNull(inMemoryTaskManager.getSubtask(subTask.getId()));
-        }
-
-        @Test
-        void createSubTask() {
-            assertNotNull(subTask);
-        }
     }
+
+    @Test
+    void epicDONEAndNewStatusOfSubtasks() {
+
+        subTask1.setStatus(Status.NEW);
+        subTask.setStatus(Status.IN_PROGRESS);
+
+        inMemoryTaskManager.updateSubTasks(subTask);
+        inMemoryTaskManager.updateSubTasks(subTask1);
+        inMemoryTaskManager.updateEpic(epic);
+
+
+        assertEquals(Status.IN_PROGRESS, epic.getStatus());
+    }
+
 }

@@ -1,6 +1,7 @@
 package service;
 
 import converter.TaskConverter;
+import exception.ManagerSaveException;
 import model.Epic;
 import model.SubTask;
 import model.Task;
@@ -31,8 +32,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void removeTasks(int id) {
-        super.removeTasks(id);
+    public void removeTask(int id) {
+        super.removeTask(id);
         save();
     }
 
@@ -45,10 +46,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
 
     @Override
-    public Task updateTask(Task task) {
+    public void updateTask(Task task) {
         super.updateTask(task);
         save();
-        return task;
     }
 
     @Override
@@ -77,17 +77,16 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public SubTask createSubTask(SubTask subTask, Epic epic) {
-        super.createSubTask(subTask, epic);
+    public SubTask createSubTask(SubTask subTask) {
+        super.createSubTask(subTask);
         save();
         return subTask;
     }
 
     @Override
-    public SubTask updateSubTasks(SubTask subTask) {
+    public void updateSubTasks(SubTask subTask) {
         super.updateSubTasks(subTask);
         save();
-        return subTask;
     }
 
     public void save() {

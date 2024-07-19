@@ -9,9 +9,9 @@ import java.util.List;
 public class InMemoryHistoryManager implements HistoryManager {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
-    private final HashMap<Integer, Node<Task>> map = new HashMap<>();
-    Node<Task> first;
-    Node<Task> last;
+    private final HashMap<Integer, Node<Task>> nodeMap = new HashMap<>();
+    private Node<Task> first;
+    private Node<Task> last;
 
     private void linkLast(Task task) {
         final Node<Task> f = first;
@@ -26,26 +26,27 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-
         if (task != null) {
             linkLast(task);
-            map.put(task.getId(), new Node<>(first, task, last));
+            nodeMap.put(task.getId(), new Node<>(first, task, last));
         }
     }
 
     private void getTasks() {
-        for (Node<Task> node : map.values()) {
+        for (Node<Task> node : nodeMap.values()) {
             tasks.add(node.element);
         }
     }
 
     private void removeNode(Node<Task> node) {
-        map.remove(node.element.getId());
+        if (node != null) {
+            nodeMap.remove(node.element.getId());
+        }
     }
 
     @Override
     public void remove(int id) {
-        removeNode(map.get(id));
+        removeNode(nodeMap.get(id));
         tasks.remove(id);
     }
 
