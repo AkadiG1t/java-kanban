@@ -15,7 +15,7 @@ public class Task  {
     private Duration duration;
     private LocalDateTime startTime;
 
-    public Task (String name, String description) {
+    public Task(String name, String description) {
         this.name = name;
         this.description = description;
         duration = Duration.ZERO;
