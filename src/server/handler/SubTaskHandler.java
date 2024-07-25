@@ -13,11 +13,11 @@ public class SubTaskHandler extends BaseTaskHandler {
     }
 
     @Override
-    void handlePost(HttpExchange exchange, String[] URISegments) throws IOException {
+    void handlePost(HttpExchange exchange, String[] uriSegments) throws IOException {
         SubTask subTask = deserializeRequestBody(exchange,SubTask.class);
 
-        if (URISegments.length > 2) {
-            String id = URISegments[2];
+        if (uriSegments.length > 2) {
+            String id = uriSegments[2];
             if (!id.isEmpty()) {
                 if (taskManager.getTasks().contains(taskManager.getTask(Integer.parseInt(id)))) {
                     taskManager.updateTask(subTask);
@@ -35,9 +35,9 @@ public class SubTaskHandler extends BaseTaskHandler {
 
 
     @Override
-    void handleGet(HttpExchange exchange, String[] URISegments) throws IOException {
-        if (URISegments.length > 2) {
-            String id = URISegments[2];
+    void handleGet(HttpExchange exchange, String[] uriSegments) throws IOException {
+        if (uriSegments.length > 2) {
+            String id = uriSegments[2];
             if (!id.isEmpty()) {
                 if (taskManager.getAllSubTasks().contains(taskManager.getSubtask(Integer.parseInt(id)))) {
                     sendText(exchange, gson.toJson(taskManager.getSubtask(Integer.parseInt(id))), 200);
@@ -52,9 +52,9 @@ public class SubTaskHandler extends BaseTaskHandler {
     }
 
     @Override
-    void handleDelete(HttpExchange exchange, String[] URISegments) throws IOException {
-        if (URISegments.length > 2) {
-            String id = URISegments[2];
+    void handleDelete(HttpExchange exchange, String[] uriSegments) throws IOException {
+        if (uriSegments.length > 2) {
+            String id = uriSegments[2];
             if (!id.isEmpty()) {
                 if (taskManager.getAllSubTasks().contains(taskManager.getSubtask(Integer.parseInt(id)))) {
                     taskManager.removeSubTask(Integer.parseInt(id));

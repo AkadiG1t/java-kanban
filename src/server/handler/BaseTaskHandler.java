@@ -32,23 +32,23 @@ abstract class BaseTaskHandler implements HttpHandler {
                 StandardCharsets.UTF_8), tClass);
     }
 
-    abstract void handlePost(HttpExchange exchange, String[] URISegments) throws IOException;
+    abstract void handlePost(HttpExchange exchange, String[] uriSegments) throws IOException;
 
-    abstract void handleGet(HttpExchange exchange, String[] URISegments) throws IOException;
+    abstract void handleGet(HttpExchange exchange, String[] uriSegments) throws IOException;
 
-    abstract void handleDelete(HttpExchange exchange, String[] URISegments) throws IOException;
+    abstract void handleDelete(HttpExchange exchange, String[] uriSegments) throws IOException;
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         try {
             String method = String.valueOf(exchange.getRequestMethod());
             String path = exchange.getRequestURI().getPath();
-            String[] URISegments = path.split("/");
+            String[] uriSegments = path.split("/");
 
             switch (method) {
-                case "POST" -> handlePost(exchange, URISegments);
-                case "GET" -> handleGet(exchange, URISegments);
-                case "DELETE" -> handleDelete(exchange, URISegments);
+                case "POST" -> handlePost(exchange, uriSegments);
+                case "GET" -> handleGet(exchange, uriSegments);
+                case "DELETE" -> handleDelete(exchange, uriSegments);
                 default -> {
                     ErrorMethod errorMethod = new ErrorMethod("Выбран неверный метод запроса");
                     sendText(exchange, gson.toJson(errorMethod), 405);

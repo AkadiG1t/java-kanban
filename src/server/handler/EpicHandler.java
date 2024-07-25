@@ -14,11 +14,11 @@ public class EpicHandler extends BaseTaskHandler {
     }
 
     @Override
-    void handlePost(HttpExchange exchange, String[] URISegments) throws IOException {
+    void handlePost(HttpExchange exchange, String[] uriSegments) throws IOException {
         Epic epic = deserializeRequestBody(exchange, Epic.class);
 
-        if (URISegments.length > 2) {
-            String id = URISegments[2];
+        if (uriSegments.length > 2) {
+            String id = uriSegments[2];
             if (!id.isEmpty()) {
                 if (taskManager.getTasks().contains(taskManager.getTask(Integer.parseInt(id)))) {
                     taskManager.updateTask(epic);
@@ -36,9 +36,9 @@ public class EpicHandler extends BaseTaskHandler {
 
 
     @Override
-    void handleGet(HttpExchange exchange, String[] URISegments) throws IOException {
-        if (URISegments.length > 2) {
-            String id = URISegments[2];
+    void handleGet(HttpExchange exchange, String[] uriSegments) throws IOException {
+        if (uriSegments.length > 2) {
+            String id = uriSegments[2];
             if (!id.isEmpty()) {
                 if (taskManager.getEpics().contains(taskManager.getEpic(Integer.parseInt(id)))) {
                     sendText(exchange, gson.toJson(taskManager.getEpic(Integer.parseInt(id))), 200);
@@ -54,9 +54,9 @@ public class EpicHandler extends BaseTaskHandler {
     }
 
     @Override
-    void handleDelete(HttpExchange exchange, String[] URISegments) throws IOException {
-        if (URISegments.length > 2) {
-            String id = URISegments[2];
+    void handleDelete(HttpExchange exchange, String[] uriSegments) throws IOException {
+        if (uriSegments.length > 2) {
+            String id = uriSegments[2];
             if (!id.isEmpty()) {
                 if (taskManager.getEpics().contains(taskManager.getEpic(Integer.parseInt(id)))) {
                     taskManager.removeEpic(Integer.parseInt(id));

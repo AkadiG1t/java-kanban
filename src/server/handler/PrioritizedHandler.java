@@ -11,12 +11,12 @@ public class PrioritizedHandler extends BaseTaskHandler {
     }
 
     @Override
-    void handlePost(HttpExchange exchange, String[] URISegments) throws IOException {
+    void handlePost(HttpExchange exchange, String[] uriSegments) throws IOException {
         sendText(exchange, "Этого метода нет у истории.", 405);
     }
 
     @Override
-    void handleGet(HttpExchange exchange, String[] URISegments) throws IOException {
+    void handleGet(HttpExchange exchange, String[] uriSegments) throws IOException {
         if (taskManager.getHistory().isEmpty()) {
             sendText(exchange, gson.toJson(taskManager.getHistory()), 200);
         } else {
@@ -25,7 +25,7 @@ public class PrioritizedHandler extends BaseTaskHandler {
     }
 
     @Override
-    void handleDelete(HttpExchange exchange, String[] URISegments) throws IOException {
+    void handleDelete(HttpExchange exchange, String[] uriSegments) throws IOException {
         sendText(exchange, "Этого метода нет у истории", 405);
     }
 }
