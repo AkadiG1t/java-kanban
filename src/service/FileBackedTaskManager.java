@@ -97,7 +97,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
 
 
-    public void save() { try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file,
+    public void save() {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file,
             StandardCharsets.UTF_8))) {
 
         for (Map.Entry<Integer, Epic> entry : epics.entrySet()) {

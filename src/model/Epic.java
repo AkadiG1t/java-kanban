@@ -7,9 +7,10 @@ import java.util.*;
 
 public class Epic extends Task {
     private final List<SubTask> subtasks = new ArrayList<>();
+    private LocalDateTime endTime;
 
     public Epic(String name, String description) {
-        super(name, description);
+        super(name, description, null);
 
     }
 
@@ -31,13 +32,6 @@ public class Epic extends Task {
         return optionalLocalDateTimeTask.orElse(LocalDateTime.now());
     }
 
-    @Override
-    public LocalDateTime getEndTime() {
-        Optional<LocalDateTime> optionalLocalDateTime = subtasks.stream()
-                .map(SubTask::getEndTime)
-                .max(LocalDateTime::compareTo);
-        return optionalLocalDateTime.orElse(null);
-    }
 
     @Override
     public Type getType() {
@@ -49,6 +43,11 @@ public class Epic extends Task {
         return getId();
     }
 
+    @Override
+    public void setDuration(Duration duration) {
+        super.setDuration(duration);
+    }
+
 
 
     public List<SubTask> getSubtasks() {
@@ -57,6 +56,7 @@ public class Epic extends Task {
 
     public void addSubTask(SubTask subTask) {
         subtasks.add(subTask);
+        subTask.setEpic(getEpicId());
     }
 
     public void removeSubTask(SubTask subTask) {
