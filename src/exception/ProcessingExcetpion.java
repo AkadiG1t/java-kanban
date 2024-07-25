@@ -1,6 +1,6 @@
 package exception;
 
-public class ProcessingExcetpion extends Exception{
+public class ProcessingExcetpion extends Exception {
     String message;
 
     public ProcessingExcetpion(String message) {
