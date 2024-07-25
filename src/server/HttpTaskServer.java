@@ -13,6 +13,7 @@ public class HttpTaskServer {
 
         start();
     }
+
     public static void start() throws IOException {
         TaskManager taskManager = Managers.getDefault();
 
