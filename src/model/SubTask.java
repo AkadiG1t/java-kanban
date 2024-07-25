@@ -6,16 +6,24 @@ import java.util.Objects;
 
 public class SubTask extends Task {
     private Epic epic;
+    private int epicId;
+
+
 
     public SubTask(String name, String description, Duration duration) {
         super(name, description, duration);
         setStartTime(LocalDateTime.now());
     }
 
-    public SubTask(String name, String description, Duration duration, Epic epic) {
+    public SubTask(String name, String description, Duration duration, int epicId) {
         super(name, description, duration);
         setStartTime(LocalDateTime.now());
-        this.epic = epic;
+        this.epicId = epicId;
+    }
+
+    public SubTask(String name, String desription, Duration duration, LocalDateTime startTime, int epicId) {
+        super(name, desription, duration, startTime);
+        this.epicId = epicId;
     }
 
     @Override
@@ -25,7 +33,7 @@ public class SubTask extends Task {
 
     @Override
     public Integer getEpicId() {
-        return epic.getId();
+        return epicId;
     }
 
     public void setEpic(Epic epic) {
@@ -52,7 +60,7 @@ public class SubTask extends Task {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         SubTask subTask = (SubTask) o;
-        return Objects.equals(epic, subTask.epic);
+        return Objects.equals(epic, subTask.getEpic());
     }
 
     @Override
@@ -60,5 +68,3 @@ public class SubTask extends Task {
         return Objects.hash(super.hashCode(), epic);
     }
 }
-
-

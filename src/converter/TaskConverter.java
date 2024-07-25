@@ -46,47 +46,41 @@ public class TaskConverter {
                 task.setId(Integer.parseInt(classFromString[0]));
                 task.setStatus(Status.valueOf(classFromString[3]));
 
-            } case "EPIC" -> {
+            }
+            case "EPIC" -> {
                 Epic epic = new Epic(classFromString[2], classFromString[4]);
                 epic.setId(Integer.parseInt(classFromString[0]));
                 epic.setStatus(Status.valueOf(classFromString[3]));
                 epic.setStartTime(dateTime);
                 task = epic;
 
+
                 Integer epicId = epic.getId();
                 if (tempSubTaskMap.containsKey(epicId)) {
                     List<SubTask> subTasks = tempSubTaskMap.get(epicId);
 
-                       for (SubTask subTask : subTasks) {
-                            epic.addSubTask(subTask);
-                       }
-
-                        tempSubTaskMap.remove(epicId);
-                }
-
-            } case "SUBTASK" -> {
-                    SubTask subTask = taskManager.createSubTask(new SubTask(classFromString[2], classFromString[4],
-                            duration));
-                    subTask.setId(Integer.parseInt(classFromString[0]));
-                    subTask.setStatus(Status.valueOf(classFromString[3]));
-                    subTask.setStartTime(dateTime);
-                    task = subTask;
-
-                    int epicId = Integer.parseInt(classFromString[5]);
-                    for (Epic epic : taskManager.getEpics()) {
-                        if (epic.getId() == epicId) {
-                            subTask.setEpic(epic);
-                            epic.addSubTask(subTask);
-                        } else {
-                            tempSubTaskMap.keySet().stream()
-                                    .filter(key -> key == epicId)
-                                    .forEach(key -> tempSubTaskMap.get(key).add(subTask));
+                    for (SubTask subTask : subTasks) {
+                        epic.addSubTask(subTask);
                     }
+
+                    tempSubTaskMap.remove(epicId);
                 }
-            } default -> throw new NotFoundException("Обнаружен новый объект");
 
+            }
+            case "SUBTASK" -> {
+                SubTask subTask = taskManager.createSubTask(new SubTask(classFromString[2], classFromString[4],
+                        duration));
+                subTask.setId(Integer.parseInt(classFromString[0]));
+                subTask.setStatus(Status.valueOf(classFromString[3]));
+                subTask.setStartTime(dateTime);
+                subTask.setEpic(Integer.parseInt(classFromString[5]));
+                task = subTask;
+
+
+            }
+
+            default -> throw new NotFoundException("Обнаружен новый объект");
         }
-
         return task;
     }
 }

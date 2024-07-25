@@ -9,6 +9,8 @@ import service.InMemoryTaskManager;
 import service.Managers;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,10 +20,10 @@ class InMemoryTaskManagerTests {
 
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(Managers.getDefaultHistory());
 
-        Task task = inMemoryTaskManager.createTask(new Task("newTask", "newDescription1"));
+        Task task = inMemoryTaskManager.createTask(new Task("newTask", "newDescription1", Duration.ofMinutes(20), LocalDateTime.now()));
         Epic epic = inMemoryTaskManager.createEpic(new Epic("newEpic", "newDescription2"));
         SubTask subTask = inMemoryTaskManager.createSubTask(new SubTask("newSubTask", "newDescription3",
-                        Duration.of(20, ChronoUnit.MINUTES), epic));
+                        Duration.of(20, ChronoUnit.MINUTES), LocalDateTime.MIN, epic.getId()));
 
         @Test
         void createTask() {
@@ -77,10 +79,13 @@ class InMemoryTaskManagerTests {
 
         @Test
         void updateTask() {
-            Task task1 = inMemoryTaskManager.createTask(new Task("NewTask"
-                    ,task.getDescription(), task.getDuration()));
-            task1.setId(subTask.getId());
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+            Task task1 = inMemoryTaskManager.createTask(new Task("name", "dasd", Duration.ofMinutes(30),
+                    LocalDateTime.parse("26.07.2024 16:18:24", dateTimeFormatter)));
+            task1.setStartTime(LocalDateTime.parse("27.07.2024 16:18:24",dateTimeFormatter));
+            task1.setId(task.getId());
             inMemoryTaskManager.updateTask(task1);
+
             assertNotEquals(task1, task);
         }
 
@@ -146,7 +151,7 @@ class InMemoryTaskManagerTests {
         @Test
         void updateSubTasks() {
             SubTask subTask1 = inMemoryTaskManager.createSubTask(new SubTask("NewSubTask"
-                    , subTask.getDescription(), subTask.getDuration(), epic));
+                    , subTask.getDescription(), subTask.getDuration(), LocalDateTime.MAX, epic.getId()));
             subTask1.setStatus(Status.DONE);
             inMemoryTaskManager.updateSubTasks(subTask1);
             assertNotEquals(subTask1, subTask);
