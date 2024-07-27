@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class Task {
+public class Task  {
     private String name;
     private String description;
     private Status status = Status.NEW;
@@ -18,8 +18,9 @@ public class Task {
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
+        duration = Duration.ZERO;
         startTime = LocalDateTime.now();
-        this.duration = Objects.requireNonNullElse(duration, Duration.ZERO);
+
     }
 
     public Task(String name, String description, Duration duration) {
@@ -28,6 +29,14 @@ public class Task {
         startTime = LocalDateTime.now();
         this.duration = Objects.requireNonNullElse(duration, Duration.ZERO);
     }
+
+    public Task(String name, String desription, Duration duration, LocalDateTime startTime) {
+        this.name = name;
+        this.description = desription;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
+
 
     public LocalDateTime getEndTime() {
         return startTime.plusMinutes(duration.toMinutes());
@@ -81,6 +90,10 @@ public class Task {
         return duration;
     }
 
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
@@ -113,6 +126,11 @@ public class Task {
     public int hashCode() {
         return Objects.hash(name, description, status, id, type, epic, duration, startTime);
     }
+
+    public void setEpic(int epic) {
+        this.epic = epic;
+    }
+
 }
 
 

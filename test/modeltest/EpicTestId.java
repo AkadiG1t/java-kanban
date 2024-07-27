@@ -11,6 +11,7 @@ import service.InMemoryHistoryManager;
 import service.InMemoryTaskManager;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,9 +29,9 @@ class EpicTest {
         epic = new Epic("Epic Task", "Epic Description");
         inMemoryTaskManager.createEpic(epic);
         subTask = inMemoryTaskManager.createSubTask(new SubTask("SubTask 1", "Description 1"
-                , Duration.ZERO, epic));
+                , Duration.ofMinutes(20), LocalDateTime.MIN, epic.getId()));
         subTask1 = inMemoryTaskManager.createSubTask(new SubTask("SubTask 2", "Description 2"
-                , Duration.ZERO, epic));
+                , Duration.ofMinutes(50), epic.getId()));
     }
 
     @Test

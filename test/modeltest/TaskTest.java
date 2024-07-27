@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import service.InMemoryTaskManager;
 import service.Managers;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,8 +15,8 @@ class TaskTest {
 
     @Test
     void addNewTask() {
-        Task task = new Task("Test addNewTask", "Test addNewTask description");
-        final int taskId = inMemoryTaskManager.createTask(task).getId();
+        Task task = inMemoryTaskManager.createTask(new Task("name", "descr", Duration.ofMinutes(20)));
+        final int taskId = task.getId();
 
         final Task savedTask = inMemoryTaskManager.getTask(taskId);
 

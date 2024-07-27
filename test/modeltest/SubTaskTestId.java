@@ -5,16 +5,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
 class SubTaskTestId {
-    SubTask subTask = new SubTask("new subTask", "task", Duration.of(20, ChronoUnit.MINUTES));
-    SubTask subTask2 = new SubTask("new subTask", "task", Duration.of(20, ChronoUnit.MINUTES));
+    SubTask subTask1 = new SubTask("name", "dest", Duration.ZERO);
+    SubTask subTask2 = new SubTask("name", "dest", Duration.ZERO);
+
 
     @Test
     void epicEquals() {
-        subTask.setId(1);
+        subTask1.setId(1);
         subTask2.setId(1);
-        Assertions.assertEquals(subTask, subTask2);
+        Assertions.assertEquals(subTask1, subTask2);
     }
 }

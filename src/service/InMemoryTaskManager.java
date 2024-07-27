@@ -85,10 +85,8 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateTask(Task task) {
-        if (tasks.containsValue(task)) {
+        if (tasks.containsKey(task.getId())) {
             tasks.put(task.getId(), task);
-            checkOverlayTime(task);
-            addToPrioritized(task);
         } else {
             throw new NotFoundException("Задача не найдена");
         }
@@ -109,7 +107,6 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Epic getEpic(int id) {
-
         if (epics.containsKey(id)) {
             historyManager.add(epics.get(id));
             return epics.get(id);
@@ -126,7 +123,6 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteEpics() {
-        prioritizeTask.removeAll(epics.values());
         prioritizeTask.removeAll(subTasks.values());
         epics.clear();
         subTasks.clear();
@@ -136,7 +132,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void removeEpic(int id) {
         if (epics.containsKey(id)) {
 
-            prioritizeTask.remove(epics.get(id));
             epics.get(id).getSubtasks().clear();
             epics.remove(id);
             if (historyManager.getHistory().contains(epics.get(id))) {
@@ -154,13 +149,16 @@ public class InMemoryTaskManager implements TaskManager {
         if (saved == null) {
             throw new NotFoundException("Не найден эпик " + epic.getId());
         }
+        if (epics.containsKey(epic.getId())) {
         saved.setName(epic.getName());
         saved.setDescription(epic.getDescription());
         saved.getSubtasks().clear();
         epic.getSubtasks().forEach(saved::addSubTask);
-        addToPrioritized(saved);
         epics.put(epic.getEpicId(), saved);
         checkEpicStatus(saved);
+        } else {
+            throw new NotFoundException("Эпик не найден");
+        }
     }
 
     @Override
@@ -181,7 +179,6 @@ public class InMemoryTaskManager implements TaskManager {
         epics.values().forEach(epic -> {
             epic.getSubtasks().clear();
             checkEpicStatus(epic);
-            addToPrioritized(epic);
         });
     }
 
@@ -215,37 +212,32 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public SubTask createSubTask(SubTask subTask) {
-
         if (subTask == null) {
             return null;
         }
+
         subTask.setId(generateID());
         subTask.setStatus(Status.NEW);
         subTasks.put(subTask.getId(), subTask);
+        subTask.setEpic(getEpic(subTask.getEpicId()));
+        addToPrioritized(subTask);
 
         if (subTask.getEpic() != null) {
             subTask.getEpic().addSubTask(subTask);
-            addToPrioritized(subTask.getEpic());
         }
+
         return subTask;
     }
 
     @Override
     public void updateSubTasks(SubTask subTask) {
-        SubTask saved = subTasks.get(subTask.getId());
-        if (saved == null) {
+        if (subTask == null) {
             throw new NotFoundException("Подзадача не найдена");
         } else {
-            saved.setStatus(subTask.getStatus());
-            saved.setStartTime(subTask.getStartTime());
-            saved.setEpic(subTask.getEpic());
-            saved.setName(subTask.getName());
-            saved.setDescription(subTask.getDescription());
-            saved.getEpic().getSubtasks().remove(subTask);
-            saved.getEpic().getSubtasks().add(saved);
-            addToPrioritized(saved);
-            subTasks.put(saved.getId(), saved);
-            checkEpicStatus(saved.getEpic());
+            subTasks.put(subTask.getId(), subTask);
+            updateEpic(subTask.getEpic());
+            prioritizeTask.remove(subTask);
+            addToPrioritized(subTask);
         }
     }
 
@@ -262,16 +254,19 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     public void addToPrioritized(Task task) {
-        if (task.getStartTime() != null && !task.getDuration().isZero() && prioritizeTask.size() > 1) {
-
-            if (!checkOverlayTime(task)) {
-                prioritizeTask.remove(task);
+        if (task.getStartTime() != null && !task.getDuration().isZero()) {
+            if (prioritizeTask.isEmpty()) {
                 prioritizeTask.add(task);
             } else {
-                throw new ValidateException("Ошибка валидации: нельзя выполнять более одной задачи единовременно");
+                if (!checkOverlayTime(task)) {
+                    prioritizeTask.add(task);
+                } else {
+                    throw new ValidateException("Ошибка валидации: нельзя выполнять более одной задачи единовременно");
+                }
             }
         }
     }
+
 
     @Override
     public List<Task> getPrioritizedTasks() {

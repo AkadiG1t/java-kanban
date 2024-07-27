@@ -59,6 +59,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
+    public void removeEpic(int id) {
+        super.removeEpic(id);
+        save();
+    }
+
+    @Override
     public void deleteEpics() {
         super.deleteEpics();
         save();
@@ -89,23 +95,26 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         save();
     }
 
+
+
     public void save() {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file,
+            StandardCharsets.UTF_8))) {
 
-            for (Map.Entry<Integer, Epic> entry : epics.entrySet()) {
-                bufferedWriter.append(TaskConverter.toString(entry.getValue()));
-                bufferedWriter.newLine();
-            }
+        for (Map.Entry<Integer, Epic> entry : epics.entrySet()) {
+            bufferedWriter.append(TaskConverter.toString(entry.getValue()));
+            bufferedWriter.newLine();
+        }
 
-            for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
-                bufferedWriter.append(TaskConverter.toString(entry.getValue()));
-                bufferedWriter.newLine();
-            }
+        for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
+            bufferedWriter.append(TaskConverter.toString(entry.getValue()));
+            bufferedWriter.newLine();
+        }
 
-            for (Map.Entry<Integer, SubTask> entry : subTasks.entrySet()) {
-                bufferedWriter.append(TaskConverter.toString(entry.getValue()));
-                bufferedWriter.newLine();
-            }
+        for (Map.Entry<Integer, SubTask> entry : subTasks.entrySet()) {
+            bufferedWriter.append(TaskConverter.toString(entry.getValue()));
+            bufferedWriter.newLine();
+        }
 
         } catch (IOException e) {
             throw new ManagerSaveException("Ошибка при записи в файл: " + file);
@@ -128,8 +137,3 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         return taskManager;
     }
 }
-
-
-
-
-
